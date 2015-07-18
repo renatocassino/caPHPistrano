@@ -1,0 +1,46 @@
+#!/usr/bin/php
+<?php
+/**
+ * This is the binary to run the caphpistrano.
+ *
+ * @license MIT
+ * @author (c) Renato Cassino <renatocassino@gmail.com>
+ * @link    https://github.com/tokenpost/caPHPistrano
+ * @version v0.3
+ */
+use TokenPost\CaPHPistrano;
+
+date_default_timezone_set('America/Los_Angeles');
+$baseDir = dirname(dirname(dirname(__DIR__)));
+
+if (PHP_SAPI !== 'cli') {
+    die('You must be run in a terminal or DOS.');
+}
+
+// Initializing the autoloader.
+if(file_exists($baseDir . '/autoload.php')) {
+	require $baseDir . '/autoload.php';
+} elseif(file_exists(dirname(__FILE__) . '/../vendor/autoload.php')) {
+	require dirname(__FILE__) . '/../vendor/autoload.php';
+}
+
+if(isset($argv[1]) && file_exists($argv[1]))
+{
+    $filename = $argv[1];
+
+    for($i = 1; $i < $argc-1; $i++) {
+        $argv[$i] = $argv[$i+1];
+    }
+    array_pop($argv);
+    $argc--;
+
+    require $filename;
+    exit();
+}
+
+/**
+ *  Formats:
+ *  - ./caphp 
+ */
+$caphp = CaPHPistrano::getInstance();
+$caphp->start();
