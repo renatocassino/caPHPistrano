@@ -1,5 +1,5 @@
 {
-	"name": "tokenpost/caphpistrano",
+	"name": "tacnoman/caphpistrano",
 	"keywords": ["capistrano","deploy","php","deployer","tokenpost"],
 	"description": "Package to make deploy PHP applications. It's similar to capistrano (Ruby).",
 	"license": "MIT",
